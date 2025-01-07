@@ -1,7 +1,6 @@
 <script lang="ts">
     import pkg from 'kwesforms';
     const {kwesforms} = pkg;
-    // import {kwesforms} from "kwesforms"
     import {onMount} from "svelte"
 
     onMount(() => {
