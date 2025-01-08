@@ -1,34 +1,20 @@
 ---
-import type { CollectionEntry } from "astro:content"
-import { getCollection } from "astro:content"
+import { getEntry } from "astro:content"
 import Layout from "../../layouts/Layout.astro"
 import Main from "../../components/Main.astro"
 import H1 from "../../components/H1.astro"
 import { Image, getImage } from "astro:assets"
 import TableOfContent from "../../components/TableOfContent.astro"
 import Share from "../../components/Share.astro"
+export const prerender = false
 
-export const getStaticPaths = async () => {
-  const posts = await getCollection("posts")
+const { slug } = Astro.params
+const post = await getEntry("posts", slug as string)
 
-  const paths = posts.map((post) => {
-    return {
-      params: {
-        slug: post.slug,
-      },
-      props: {
-        post,
-      },
-    }
-  })
-  return paths
+if (!post) {
+  return Astro.redirect("/404")
 }
 
-type Props = {
-  post: CollectionEntry<"posts">
-}
-
-const { post } = Astro.props
 const { Content, headings } = await post.render()
 const coverImageSource = (await getImage({ src: post.data.image })).src
 ---
@@ -39,9 +25,9 @@ const coverImageSource = (await getImage({ src: post.data.image })).src
   image={coverImageSource}
 >
   <Main>
-    <a href="/blog" class="text-zinc-500 text-2xl mb-16 underline block"
-      >🡨 Back to all entries</a
-    >
+    <div class="text-zinc-500 text-2xl mb-16">
+      ← <a href="/blog" class="underline">Back to all entries</a>
+    </div>
     <H1 text={post.data.title} />
     <Image
       src={post.data.image}
@@ -55,7 +41,7 @@ const coverImageSource = (await getImage({ src: post.data.image })).src
       <TableOfContent headings={headings} />
     </div>
 
-    <div class="relative">
+    <div class="relative mb-9">
       <Share post={post} />
       <div class="prose prose-2xl overflow-visible relative">
         <Content />

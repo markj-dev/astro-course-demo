@@ -8,34 +8,17 @@ import Main from "../../components/Main.astro"
 import Pagination from "../../components/Pagination.astro"
 import PostList from "../../components/PostList.astro"
 import Layout from "../../layouts/Layout.astro"
-export const getStaticPaths = async () => {
-  const posts = await getCollection("posts")
-  const allCategories = posts.flatMap((post) => post.data.categories)
-  const categories = Array.from(new Set(allCategories))
+export const prerender = false
 
-  const paths = categories.map((category) => {
-    const postByCategory = posts.filter((post) =>
-      post.data.categories.includes(category)
-    )
-    return {
-      params: {
-        slug: category,
-      },
-      props: {
-        category,
-        posts: postByCategory,
-      },
-    }
-  })
-  return paths
-}
+const page = Number(Astro.url.searchParams.get("page")) || 1
+const postPerPage = Number(import.meta.env.POST_PER_PAGE)
+const start = postPerPage * (page - 1)
+const end = start + postPerPage
 
-type Props = {
-  category: string
-  posts: CollectionEntry<"posts">[]
-}
-
-const { category, posts } = Astro.props
+const category = Astro.params.slug as string
+const allPosts = await getCollection("posts")
+const postsByCategory = allPosts.filter((post) => post.data.categories.includes(category))
+const posts = postsByCategory.slice(start, end)
 ---
 
 <Layout
@@ -43,21 +26,28 @@ const { category, posts } = Astro.props
   description="Read and learn from Music Producers and Enthusiasts"
 >
   <Main>
-    <a href="/blog" class="text-zinc-500 text-2xl mb-16 underline block"
-      >🡨 Back to all entries</a
-    >
+    <div class="text-zinc-500 text-2xl mb-16">
+      ← <a href="/blog" class="underline">Back to all entries</a>
+    </div>
     <H1 text="Rhythm Nation Blog" />
     <p class="text-zinc-900 text-2xl mb-24 max-sm:mb-14">
       Join the Community and learn from Music Producers and Enthusiasts
     </p>
     <CategoryList categories={[category]} title="Posts tagged" />
 
-    <div class="mb-12">
-      <Pagination nextURL="/blog/2" />
+    {
+      posts.length === 0 ? (
+        <p class="mb-36">No posts were found with that tag.</p>
+      ) : (
+      <div class="mb-12">
+      <Pagination page={page} numberOfPosts={postsByCategory.length} />
     </div>
-    <PostList posts={posts} />
-    <div class="mb-36">
-      <Pagination nextURL="/blog/2" />
+        <PostList posts={posts} />
+        <div class="mb-36">
+      <Pagination page={page} numberOfPosts={postsByCategory.length} />
     </div>
+      )
+    }
+
   </Main>
 </Layout>
