@@ -3,6 +3,7 @@ import "@fontsource/cabin"
 
 import Header from "../components/Header.astro"
 import Footer from "../components/Footer.astro"
+import { getThumbnail } from "../cloudinary"
 
 export interface Props {
   title?: string
@@ -13,7 +14,7 @@ export interface Props {
 const {
   title = "Rhythm Nation",
   description = "A demo blog for a community of music producers and enthusiasts",
-  image = "/image/drums.png",
+  image = getThumbnail("A community of music producers and enthusiasts"),
 } = Astro.props
 ---
 
