@@ -1,0 +1,6 @@
+{
+  "databaseURL": "https://Mark-Jackson-s-workspace-j42kqq.us-east-1.xata.sh/db/astro-course-demo",
+  "codegen": {
+    "output": "src/xata.ts"
+  }
+}

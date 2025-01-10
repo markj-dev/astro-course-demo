@@ -1,0 +1,24 @@
+{
+  "done": true,
+  "migration": {
+    "name": "mig_cu04ndpro7530ttkk1vg",
+    "operations": [
+      {
+        "add_column": {
+          "table": "users",
+          "column": {
+            "name": "password",
+            "type": "text",
+            "comment": "",
+            "default": "''"
+          }
+        }
+      }
+    ]
+  },
+  "migrationType": "pgroll",
+  "name": "mig_cu04ndpro7530ttkk1vg",
+  "parent": "mig_cu04n08a9dahcg286v8g",
+  "schema": "public",
+  "startedAt": "2025-01-09T22:20:40.550083Z"
+}
