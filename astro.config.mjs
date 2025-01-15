@@ -10,6 +10,6 @@ import vercel from "@astrojs/vercel"
 // https://astro.build/config
 export default defineConfig({
   integrations: [tailwind(), svelte()],
-  site: "https://rhythmnationblog.netlify.app",
+  site: "https://astro-course-demo-ashy.vercel.app",
   adapter: vercel(),
 })
