@@ -13,6 +13,7 @@
     "@astrojs/rss": "^4.0.11",
     "@astrojs/svelte": "^7.0.3",
     "@astrojs/tailwind": "^5.1.4",
+    "@astrojs/vercel": "^8.0.2",
     "@cloudinary/url-gen": "^1.21.0",
     "@fontsource/cabin": "^5.1.0",
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
