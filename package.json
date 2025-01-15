@@ -15,6 +15,7 @@
     "@astrojs/tailwind": "^5.1.4",
     "@cloudinary/url-gen": "^1.21.0",
     "@fontsource/cabin": "^5.1.0",
+    "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "@types/markdown-it": "^14.1.2",
     "@types/sanitize-html": "^2.13.0",
     "@xata.io/client": "^0.0.0-next.va121e4207b94bfe0a3c025fc00b247b923880930",
@@ -25,6 +26,7 @@
     "markdown-it": "^14.1.0",
     "sanitize-html": "^2.14.0",
     "svelte": "^5.16.5",
+    "svelte-fa": "^4.0.3",
     "tailwindcss": "^3.4.17",
     "typescript": "^5.7.2"
   },

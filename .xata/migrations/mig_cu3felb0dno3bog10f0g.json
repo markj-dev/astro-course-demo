@@ -1,0 +1,57 @@
+{
+  "done": true,
+  "migration": {
+    "name": "mig_cu3felb0dno3bog10f0g",
+    "operations": [
+      {
+        "create_table": {
+          "name": "subscribers",
+          "columns": [
+            {
+              "name": "xata_id",
+              "type": "text",
+              "check": {
+                "name": "subscribers_xata_id_length_xata_id",
+                "constraint": "length(\"xata_id\") < 256"
+              },
+              "unique": true,
+              "default": "'rec_' || xata_private.xid()"
+            },
+            {
+              "name": "xata_version",
+              "type": "integer",
+              "default": "0"
+            },
+            {
+              "name": "xata_createdat",
+              "type": "timestamptz",
+              "default": "now()"
+            },
+            {
+              "name": "xata_updatedat",
+              "type": "timestamptz",
+              "default": "now()"
+            }
+          ]
+        }
+      },
+      {
+        "sql": {
+          "up": "ALTER TABLE \"subscribers\" REPLICA IDENTITY FULL",
+          "onComplete": true
+        }
+      },
+      {
+        "sql": {
+          "up": "CREATE TRIGGER xata_maintain_metadata_trigger_pgroll\n  BEFORE INSERT OR UPDATE\n  ON \"subscribers\"\n  FOR EACH ROW\n  EXECUTE FUNCTION xata_private.maintain_metadata_trigger_pgroll()",
+          "onComplete": true
+        }
+      }
+    ]
+  },
+  "migrationType": "pgroll",
+  "name": "mig_cu3felb0dno3bog10f0g",
+  "parent": "mig_cu2n03j0dno3bog106pg",
+  "schema": "public",
+  "startedAt": "2025-01-14T23:46:30.65323Z"
+}

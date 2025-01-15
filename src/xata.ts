@@ -17,9 +17,9 @@ const tables = [
       },
     },
     foreignKeys: {
-      "user.id_link": {
-        name: "user.id_link",
-        columns: ["user.id"],
+      user_link: {
+        name: "user_link",
+        columns: ["user"],
         referencedTable: "users",
         referencedColumns: ["xata_id"],
         onDelete: "SET NULL",
@@ -58,13 +58,162 @@ const tables = [
         comment: "",
       },
       {
-        name: "user.id",
+        name: "user",
         type: "link",
         link: { table: "users" },
         notNull: true,
         unique: false,
         defaultValue: null,
         comment: '{"xata.link":"users"}',
+      },
+      {
+        name: "xata_createdat",
+        type: "datetime",
+        notNull: true,
+        unique: false,
+        defaultValue: "now()",
+        comment: "",
+      },
+      {
+        name: "xata_id",
+        type: "text",
+        notNull: true,
+        unique: true,
+        defaultValue: "('rec_'::text || (xata_private.xid())::text)",
+        comment: "",
+      },
+      {
+        name: "xata_updatedat",
+        type: "datetime",
+        notNull: true,
+        unique: false,
+        defaultValue: "now()",
+        comment: "",
+      },
+      {
+        name: "xata_version",
+        type: "int",
+        notNull: true,
+        unique: false,
+        defaultValue: "0",
+        comment: "",
+      },
+    ],
+  },
+  {
+    name: "reactions",
+    checkConstraints: {
+      reactions_xata_id_length_xata_id: {
+        name: "reactions_xata_id_length_xata_id",
+        columns: ["xata_id"],
+        definition: "CHECK ((length(xata_id) < 256))",
+      },
+    },
+    foreignKeys: {
+      user_link: {
+        name: "user_link",
+        columns: ["user"],
+        referencedTable: "users",
+        referencedColumns: ["xata_id"],
+        onDelete: "SET NULL",
+      },
+    },
+    primaryKey: [],
+    uniqueConstraints: {
+      _pgroll_new_reactions_xata_id_key: {
+        name: "_pgroll_new_reactions_xata_id_key",
+        columns: ["xata_id"],
+      },
+    },
+    columns: [
+      {
+        name: "emoji",
+        type: "text",
+        notNull: true,
+        unique: false,
+        defaultValue: "'star'::text",
+        comment: "",
+      },
+      {
+        name: "post",
+        type: "text",
+        notNull: true,
+        unique: false,
+        defaultValue: "'null'::text",
+        comment: "",
+      },
+      {
+        name: "user",
+        type: "link",
+        link: { table: "users" },
+        notNull: false,
+        unique: false,
+        defaultValue: null,
+        comment: '{"xata.link":"users"}',
+      },
+      {
+        name: "xata_createdat",
+        type: "datetime",
+        notNull: true,
+        unique: false,
+        defaultValue: "now()",
+        comment: "",
+      },
+      {
+        name: "xata_id",
+        type: "text",
+        notNull: true,
+        unique: true,
+        defaultValue: "('rec_'::text || (xata_private.xid())::text)",
+        comment: "",
+      },
+      {
+        name: "xata_updatedat",
+        type: "datetime",
+        notNull: true,
+        unique: false,
+        defaultValue: "now()",
+        comment: "",
+      },
+      {
+        name: "xata_version",
+        type: "int",
+        notNull: true,
+        unique: false,
+        defaultValue: "0",
+        comment: "",
+      },
+    ],
+  },
+  {
+    name: "subscribers",
+    checkConstraints: {
+      subscribers_xata_id_length_xata_id: {
+        name: "subscribers_xata_id_length_xata_id",
+        columns: ["xata_id"],
+        definition: "CHECK ((length(xata_id) < 256))",
+      },
+    },
+    foreignKeys: {},
+    primaryKey: [],
+    uniqueConstraints: {
+      _pgroll_new_subscribers_xata_id_key: {
+        name: "_pgroll_new_subscribers_xata_id_key",
+        columns: ["xata_id"],
+      },
+      subscribers__pgroll_new_email_key: {
+        name: "subscribers__pgroll_new_email_key",
+        columns: ["email"],
+      },
+    },
+    columns: [
+      {
+        name: "email",
+        type: "text",
+        notNull: false,
+        unique: true,
+        defaultValue: null,
+        comment: "",
       },
       {
         name: "xata_createdat",
@@ -184,11 +333,19 @@ export type InferredTypes = SchemaInference<SchemaTables>;
 export type Comments = InferredTypes["comments"];
 export type CommentsRecord = Comments & XataRecord;
 
+export type Reactions = InferredTypes["reactions"];
+export type ReactionsRecord = Reactions & XataRecord;
+
+export type Subscribers = InferredTypes["subscribers"];
+export type SubscribersRecord = Subscribers & XataRecord;
+
 export type Users = InferredTypes["users"];
 export type UsersRecord = Users & XataRecord;
 
 export type DatabaseSchema = {
   comments: CommentsRecord;
+  reactions: ReactionsRecord;
+  subscribers: SubscribersRecord;
   users: UsersRecord;
 };
 

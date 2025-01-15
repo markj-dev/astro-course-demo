@@ -1,16 +1,16 @@
 {
   "done": true,
   "migration": {
-    "name": "mig_cu0548ga9dahcg286vt0",
+    "name": "mig_cu2n03j0dno3bog106pg",
     "operations": [
       {
         "add_column": {
-          "up": "''",
-          "table": "comments",
+          "table": "reactions",
           "column": {
             "name": "user",
             "type": "text",
             "comment": "{\"xata.link\":\"users\"}",
+            "nullable": true,
             "references": {
               "name": "user_link",
               "table": "users",
@@ -23,8 +23,8 @@
     ]
   },
   "migrationType": "pgroll",
-  "name": "mig_cu0548ga9dahcg286vt0",
-  "parent": "mig_cu053jga9dahcg286vs0",
+  "name": "mig_cu2n03j0dno3bog106pg",
+  "parent": "mig_cu2muteit2kpi5f2fu50",
   "schema": "public",
-  "startedAt": "2025-01-09T22:48:03.083429Z"
+  "startedAt": "2025-01-13T19:57:02.728259Z"
 }

@@ -1,7 +1,7 @@
 {
   "done": true,
   "migration": {
-    "name": "mig_cu0548ga9dahcg286vt0",
+    "name": "mig_cu193fpro7530ttkkbn0",
     "operations": [
       {
         "add_column": {
@@ -23,8 +23,8 @@
     ]
   },
   "migrationType": "pgroll",
-  "name": "mig_cu0548ga9dahcg286vt0",
-  "parent": "mig_cu053jga9dahcg286vs0",
+  "name": "mig_cu193fpro7530ttkkbn0",
+  "parent": "mig_cu192v9ro7530ttkkbm0",
   "schema": "public",
-  "startedAt": "2025-01-09T22:48:03.083429Z"
+  "startedAt": "2025-01-11T15:44:00.785448Z"
 }

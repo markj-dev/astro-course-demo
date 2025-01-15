@@ -1,0 +1,25 @@
+{
+  "done": true,
+  "migration": {
+    "name": "mig_cu3ff030dno3bog10f1g",
+    "operations": [
+      {
+        "add_column": {
+          "table": "subscribers",
+          "column": {
+            "name": "email",
+            "type": "text",
+            "unique": true,
+            "comment": "",
+            "nullable": true
+          }
+        }
+      }
+    ]
+  },
+  "migrationType": "pgroll",
+  "name": "mig_cu3ff030dno3bog10f1g",
+  "parent": "mig_cu3felb0dno3bog10f0g",
+  "schema": "public",
+  "startedAt": "2025-01-14T23:47:13.17612Z"
+}

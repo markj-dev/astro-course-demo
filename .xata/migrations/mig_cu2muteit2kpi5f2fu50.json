@@ -1,0 +1,24 @@
+{
+  "done": true,
+  "migration": {
+    "name": "mig_cu2muteit2kpi5f2fu50",
+    "operations": [
+      {
+        "add_column": {
+          "table": "reactions",
+          "column": {
+            "name": "post",
+            "type": "text",
+            "comment": "",
+            "default": "'null'"
+          }
+        }
+      }
+    ]
+  },
+  "migrationType": "pgroll",
+  "name": "mig_cu2muteit2kpi5f2fu50",
+  "parent": "mig_cu2mud30dno3bog106og",
+  "schema": "public",
+  "startedAt": "2025-01-13T19:54:30.114566Z"
+}

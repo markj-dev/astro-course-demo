@@ -1,0 +1,18 @@
+{
+  "done": true,
+  "migration": {
+    "name": "mig_cu19281ro7530ttkkbl0",
+    "operations": [
+      {
+        "drop_table": {
+          "name": "comments"
+        }
+      }
+    ]
+  },
+  "migrationType": "pgroll",
+  "name": "mig_cu19281ro7530ttkkbl0",
+  "parent": "mig_cu05683oqjfbc39h4fhg",
+  "schema": "public",
+  "startedAt": "2025-01-11T15:41:20.639191Z"
+}
